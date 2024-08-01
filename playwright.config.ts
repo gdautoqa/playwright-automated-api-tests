@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-
+ 
 export default defineConfig({
   testDir: './src/api',
   timeout: 30000,
@@ -27,4 +27,4 @@ export default defineConfig({
       'Content-Type': 'application/json',
     },
   },
-});
+}); 

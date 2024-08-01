@@ -5,7 +5,6 @@ This repository contains a series of automated API tests using Playwright to tes
 ## Features
 
 - **Playwright**: Utilized for end-to-end API testing.
-- **TypeScript**: Ensures type safety and improved development experience.
 - **GitHub Actions**: Configured for continuous integration and continuous deployment (CI/CD).
 - **Detailed Assertions**: Validates API responses against expected data structures and values.
 - **Logging**: Captures and logs important response details for debugging and verification.

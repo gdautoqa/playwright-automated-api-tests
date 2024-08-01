@@ -1,0 +1,20 @@
+{
+  "name": "playwright-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "This is a boilerplate setup for end-to-end UI testing using Playwright. It includes best practices and configurations for various features like screenshots, videos, accessibility testing, and continuous integration with GitHub Actions.",
+  "dependencies": {
+    "@playwright/test": "^1.45.3",
+    "playwright": "^1.45.3",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

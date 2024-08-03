@@ -1,5 +1,5 @@
 {
-  "name": "playwright-boilerplate",
+  "name": "playwright-automated-api-tests",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": "This is a boilerplate setup for end-to-end UI testing using Playwright. It includes best practices and configurations for various features like screenshots, videos, accessibility testing, and continuous integration with GitHub Actions.",
+  "license": "MIT",
+  "description": "",
   "dependencies": {
     "@playwright/test": "^1.45.3",
     "playwright": "^1.45.3",

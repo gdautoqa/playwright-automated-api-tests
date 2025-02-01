@@ -9,7 +9,10 @@ export default defineConfig({
   expect: {
     timeout: 5000,
   },
-  reporter: [['html', { open: 'never' }]],
+  reporter: [
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['html', { open: 'never' }]
+  ],
   projects: [
     {
       name: 'chromium',

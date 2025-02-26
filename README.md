@@ -1,51 +1,101 @@
 # Playwright Automated API Tests
 
-This project runs automated API tests using Playwright for the [ReqRes](https://reqres.in/) API. It leverages TypeScript for type safety and GitHub Actions for CI/CD.
+This project demonstrates automated API testing using Playwright for the [ReqRes](https://reqres.in/) REST API. It showcases best practices in API testing with TypeScript and implements continuous integration using GitHub Actions.
 
-## Tests Overview
+## Features
 
-- **GET Requests:**  
-  - List Users  
-  - Single User (and Not Found)  
-  - List/Single Resource (and Not Found)  
-  - Delayed Response
+- **Automated CI/CD**: Runs tests automatically via GitHub Actions
+- **Comprehensive Test Coverage**: Tests all major HTTP methods and response scenarios
+- **Detailed Reporting**: Generates HTML and JSON reports for test results
 
-- **POST Requests:**  
-  - Create User  
-  - Register (Successful/Unsuccessful)  
-  - Login (Successful/Unsuccessful)
+## Test Coverage
 
-- **PUT/PATCH Requests:**  
-  - Full Update  
-  - Partial Update
+### GET Endpoints
 
-- **DELETE Requests:**  
-  - Delete User
+- `/users` - List all users with pagination
+- `/users/{id}` - Get single user
+- `/users?delay={n}` - Test delayed response
+- `/unknown` - List all resources
+- `/unknown/{id}` - Get single resource
 
-## Assertions
+### POST Endpoints
 
-Each test utilizes Playwright's built-in `expect` API to assert that API responses have the correct status codes and data structures. For example, tests verify that endpoints return the expected HTTP statuses (e.g., 200 or 201), and use deep equality checks on JSON responses to ensure that the data matches the expected format.
+- `/users` - Create new user
+- `/register` - User registration (success/failure scenarios)
+- `/login` - User authentication (success/failure scenarios)
 
-## Setup & Execution
+### PUT/PATCH Endpoints
 
-Clone the repository, install dependencies, and run tests:
+- `/users/{id}` - Update user (full/partial updates)
+
+### DELETE Endpoints
+
+- `/users/{id}` - Delete user
+
+## Prerequisites
+
+- Node.js 18 or higher
+- npm or yarn package manager
+
+## Installation
+
+1. Clone the repository:
 
 ```sh
 git clone https://github.com/gdautoqa/playwright-automated-api-tests.git
+```
+
+2. Navigate to project directory:
+
+```sh
 cd playwright-automated-api-tests
+```
+
+3. Install dependencies:
+
+```sh
 npm install
+```
+
+## Running Tests
+
+### Run all tests
+
+```sh
 npx playwright test
 ```
 
-To view the HTML report:
+### Run specific test file
+
+```sh
+npx playwright test src/api/specs/user.spec.ts
+```
+
+### View test report
 
 ```sh
 npx playwright show-report
 ```
 
-## CI/CD
+## Test Reports
 
-Tests run automatically via GitHub Actions on:
-- Push and Pull Request events to the `main` branch
-- Scheduled CRON runs on weekdays at 7:00 AM Eastern Time (11:00 UTC)
-- Manual triggering via workflow dispatch
+- HTML Report: Available after test execution at `playwright-report/index.html`
+- JSON Results: Available at `test-results/results.json`
+
+## CI/CD Pipeline
+
+Tests are automatically executed in the following scenarios:
+
+- On every push to the `main` branch
+- On pull request creation/update targeting `main`
+- Daily at 7:00 AM Eastern Time (11:00 UTC) on weekdays
+- Manually via GitHub Actions workflow dispatch
+
+## Best Practices
+
+- Uses Playwright's built-in test fixtures
+- Implements proper error handling and logging
+- Follows TypeScript best practices
+- Maintains test isolation and independence
+- Uses data-driven testing approaches
+- Implements proper assertion strategies

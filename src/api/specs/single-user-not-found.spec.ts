@@ -3,7 +3,7 @@ import { ReqResApi } from '../clients/ReqResApi';
 
 test.describe('API Tests', () => {
   test('GET /users/23 - User Not Found', async ({ request }) => {
-    const reqResApi = new ReqResApi(request, 'https://reqres.in/api');
+    const reqResApi = new ReqResApi(request);
     const response = await reqResApi.getUser(23);
     expect(response.status()).toBe(404);
   });

@@ -3,13 +3,13 @@ import { ReqResApi } from '../clients/ReqResApi';
 
 test.describe('API Tests', () => {
   test('PUT /users/2 - Update User', async ({ request }) => {
-    const reqResApi = new ReqResApi(request, 'https://reqres.in/api');
+    const reqResApi = new ReqResApi(request);
     const response = await reqResApi.updateUser(2, {
       name: 'morpheus',
-      job: 'zion resident'
+      job: 'zion resident',
     });
     expect(response.status()).toBe(200);
-    
+
     const responseData = await response.json();
     console.log('Response data:', responseData);
 

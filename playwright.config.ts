@@ -11,7 +11,7 @@ export default defineConfig({
   },
   reporter: [
     ['json', { outputFile: 'test-results/results.json' }],
-    ['html', { open: 'never' }]
+    ['html', { open: 'never' }],
   ],
   projects: [
     {
@@ -20,9 +20,10 @@ export default defineConfig({
     },
   ],
   use: {
-    baseURL: 'https://reqres.in/api',
+    baseURL: 'https://reqres.in',
     extraHTTPHeaders: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
   },
-}); 
+});

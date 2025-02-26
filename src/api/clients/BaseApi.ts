@@ -3,34 +3,43 @@ import { logRequest, logResponse } from '../helpers/apiLogger';
 
 export class BaseApi {
   protected request: APIRequestContext;
-  protected baseURL: string;
 
-  constructor(request: APIRequestContext, baseURL: string) {
+  constructor(request: APIRequestContext) {
     this.request = request;
-    this.baseURL = baseURL;
-  }
-
-  protected endpoint(path: string): string {
-    return `${this.baseURL}${path}`;
   }
 
   protected async sendAndLog(
     method: 'get' | 'post' | 'put' | 'patch' | 'delete',
     path: string,
-    options?: any
+    options?: { data?: Record<string, unknown> },
   ): Promise<APIResponse> {
-    const url = this.endpoint(path);
+    const normalizedPath = path.startsWith('/api')
+      ? path
+      : `/api${path.startsWith('/') ? path : `/${path}`}`;
+
     if (options?.data) {
-      logRequest(url, method, options.data);
+      logRequest(normalizedPath, method, options.data);
     } else {
-      logRequest(url, method);
+      logRequest(normalizedPath, method);
     }
-    const response: APIResponse = await (this.request as any)[method](url, options);
-    await logResponse(url, response);
-    return response;
+
+    try {
+      const response: APIResponse = await this.request[method](
+        normalizedPath,
+        options,
+      );
+      await logResponse(normalizedPath, response);
+      return response;
+    } catch (error) {
+      console.error(
+        `Error during ${method.toUpperCase()} request to ${path}:`,
+        error,
+      );
+      throw error;
+    }
   }
 
-  protected async parseJson(response: APIResponse): Promise<any> {
+  protected async parseJson(response: APIResponse): Promise<unknown> {
     return response.json();
   }
 }

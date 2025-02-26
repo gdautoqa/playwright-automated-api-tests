@@ -3,10 +3,10 @@ import { ReqResApi } from '../clients/ReqResApi';
 
 test.describe('API Tests', () => {
   test('POST /login - Login Successful', async ({ request }) => {
-    const reqResApi = new ReqResApi(request, 'https://reqres.in/api');
+    const reqResApi = new ReqResApi(request);
     const response = await reqResApi.loginUser({
       email: 'eve.holt@reqres.in',
-      password: 'cityslicka'
+      password: 'cityslicka',
     });
     expect(response.status()).toBe(200);
 

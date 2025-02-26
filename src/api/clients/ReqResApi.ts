@@ -1,12 +1,21 @@
 import { APIResponse } from '@playwright/test';
 import { BaseApi } from './BaseApi';
+import { API_ENDPOINTS } from '../constants/apiEndpoints';
+
+interface User {
+  name: string;
+  job: string;
+}
 
 export class ReqResApi extends BaseApi {
   async getUser(id: number): Promise<APIResponse> {
     return this.sendAndLog('get', `/users/${id}`);
   }
 
-  async listUsers(params?: { page?: number; delay?: number }): Promise<APIResponse> {
+  async listUsers(params?: {
+    page?: number;
+    delay?: number;
+  }): Promise<APIResponse> {
     let query = '';
     if (params) {
       const qs = new URLSearchParams();
@@ -25,15 +34,21 @@ export class ReqResApi extends BaseApi {
     return this.sendAndLog('get', `/unknown/${id}`);
   }
 
-  async createUser(data: { name: string; job: string }): Promise<APIResponse> {
-    return this.sendAndLog('post', '/users', { data });
+  async createUser(data: User): Promise<APIResponse> {
+    return this.sendAndLog('post', API_ENDPOINTS.USERS, { data });
   }
 
-  async updateUser(id: number, data: { name: string; job: string }): Promise<APIResponse> {
+  async updateUser(
+    id: number,
+    data: { name: string; job: string },
+  ): Promise<APIResponse> {
     return this.sendAndLog('put', `/users/${id}`, { data });
   }
 
-  async patchUser(id: number, data: { name: string; job: string }): Promise<APIResponse> {
+  async patchUser(
+    id: number,
+    data: { name: string; job: string },
+  ): Promise<APIResponse> {
     return this.sendAndLog('patch', `/users/${id}`, { data });
   }
 
@@ -41,11 +56,17 @@ export class ReqResApi extends BaseApi {
     return this.sendAndLog('delete', `/users/${id}`);
   }
 
-  async registerUser(data: { email: string; password?: string }): Promise<APIResponse> {
+  async registerUser(data: {
+    email: string;
+    password?: string;
+  }): Promise<APIResponse> {
     return this.sendAndLog('post', '/register', { data });
   }
 
-  async loginUser(data: { email: string; password?: string }): Promise<APIResponse> {
+  async loginUser(data: {
+    email: string;
+    password?: string;
+  }): Promise<APIResponse> {
     return this.sendAndLog('post', '/login', { data });
   }
 }
